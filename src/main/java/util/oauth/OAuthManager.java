@@ -1,19 +1,13 @@
 package util.oauth;
 
 import classes.OAuthClient;
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.net.CookieHandler;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class OAuthManager {
 
@@ -39,9 +33,8 @@ public class OAuthManager {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
         ObjectMapper mapper = new ObjectMapper();
-        OAuthClient oAuthClient = mapper.readValue(response.body(), OAuthClient.class);
 
-        return oAuthClient;
+        return mapper.readValue(response.body(), OAuthClient.class);
     }
 
     //public OAuthClient getOAuthClient(String token, String osu_session) {
